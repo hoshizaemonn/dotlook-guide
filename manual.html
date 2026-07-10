@@ -537,9 +537,28 @@ footer {
       </tbody>
     </table>
 
-    <div class="point-box">
-      <div class="point-title">🔐 ログイン情報について</div>
-      <p style="margin:0;">セキュリティ上、ログイン情報はこのマニュアルには記載していません。<br><strong>別途お渡しする「ログイン情報」ファイル</strong>をご参照ください。</p>
+    <h3>🔐 ログイン情報を見る</h3>
+    <p>セキュリティ保護のため、ログイン情報は暗号化されています。<br>
+    パスワードを入力すると、全ての ID / PW が表示されます。</p>
+
+    <div id="credBox" style="background:#fff8f5;border:2px solid #ffb591;padding:24px;border-radius:10px;margin:16px 0;">
+      <div id="credLocked">
+        <label for="credPw" style="display:block;font-weight:bold;color:#ff6b6b;margin-bottom:8px;">
+          🔑 閲覧用パスワード
+        </label>
+        <input type="password" id="credPw" placeholder="パスワードを入力" style="width:100%;padding:12px;font-size:16px;border:2px solid #ffb591;border-radius:6px;box-sizing:border-box;margin-bottom:12px;">
+        <button onclick="unlockCreds()" style="width:100%;padding:14px;background:#ff6b6b;color:#fff;border:none;border-radius:6px;font-size:16px;font-weight:bold;cursor:pointer;">
+          🔓 ログイン情報を表示
+        </button>
+        <div id="credError" style="color:#c00;margin-top:8px;font-size:14px;display:none;">
+          ❌ パスワードが違います。もう一度お試しください。
+        </div>
+        <p style="font-size:12px;color:#888;margin-top:12px;">
+          ※パスワードは星崎から別途お伝えしております。<br>
+          ※ブラウザに「パスワードを保存」しておくと次回から自動入力できます。
+        </p>
+      </div>
+      <pre id="credUnlocked" style="display:none;background:#fff;padding:20px;border-radius:6px;font-family:monospace;font-size:13px;line-height:1.8;white-space:pre-wrap;word-break:break-all;color:#333;margin:0;"></pre>
     </div>
 
     <div class="back-to-top"><a href="#top">↑ 目次に戻る</a></div>
@@ -587,6 +606,46 @@ footer {
   </footer>
 
 </div>
+
+<script>
+const CRED_BLOB = {
+  salt: "u3PWc9BaIiqMVpfatoITlQ==",
+  iv:   "k0a7ZGau497XsP7o",
+  ct:   "Sh1y1Asy8hOCCHNSrDa+1kZOY7GUCTfzfAmBdnWWhh5wCOgv6Ue/taiFniYUh7dw0yNLKTmlGh1sfn82aFL3TQPXyNUJxtkB/An8GCeNfS1Vrj09ePnzW0oX4qn+IvsdrIGaa685cjWqhbBjTJvC5U6cLvTBa1oc1NffH2cstCs/q/ErOxo8hoD8s9cBB4TIcdNFDcu7bXyA5QlXhHPSWKm6sKc3CD4anJ0xJ3krzojG2i0TG99J+Ky8xvB3wGxPXNMjTicuJAnumpezP4qPc7VRYCPRfW03O7OELmSUCWNU8kiqTgeHpr0nfsAvUJXgdJ6fsNZjl6wxQ42U6e0wWWLDWU2mRNU9XoL4t4YMqlh8Y2wQsfSdetFkAzYAOMFviS3NYPw+romT5kxCXdK3dT5QcyPBffXnjmN5huumwhq7qT76LsJbYWzxS95WZq9enStQ8L5zmwIFJe9XcMVe0heTnhActYXd96Z4vgVRNHu3K4GgbN8dAoSjQ8F5Vej3u/UjtW8VESke4YKC4JjQHdxdSifQQvyJGz+SEiEDLKEE0wFXJmwTI4lpchYmSaySklZh1qb6AzVqkEbUR0kuojv2JwGMJJD1T8fH9MuFDSs/mkS77ocnBYzNYLTcBC/gWAQMGmaWlxuj/nzcLlQNbo4xUpwmZMQCJS4ST6h7QMvGLTelgXbKl0M9dEOIIWC9/mjIy7PhbLi6zjL5yc8/XQGTubEDXfBCmWhSEPXXkVnpoBwkZfmwkCPsEmtbsYTyrPTGUnM5P21HuQCgjeHotw9mYf17PkZ6+e8FjYA=",
+  tag:  "pOl9YuI8mB3TAVvLzfbTbA=="
+};
+function b64ToBytes(s){ return Uint8Array.from(atob(s), c=>c.charCodeAt(0)); }
+async function unlockCreds(){
+  const pw = document.getElementById('credPw').value;
+  const err = document.getElementById('credError');
+  err.style.display = 'none';
+  try {
+    const salt = b64ToBytes(CRED_BLOB.salt);
+    const iv   = b64ToBytes(CRED_BLOB.iv);
+    const ct   = b64ToBytes(CRED_BLOB.ct);
+    const tag  = b64ToBytes(CRED_BLOB.tag);
+    const enc  = new TextEncoder();
+    const keyMaterial = await crypto.subtle.importKey('raw', enc.encode(pw), 'PBKDF2', false, ['deriveKey']);
+    const key = await crypto.subtle.deriveKey(
+      { name:'PBKDF2', salt, iterations:100000, hash:'SHA-256' },
+      keyMaterial, { name:'AES-GCM', length:256 }, false, ['decrypt']
+    );
+    const ctWithTag = new Uint8Array(ct.length + tag.length);
+    ctWithTag.set(ct); ctWithTag.set(tag, ct.length);
+    const plain = await crypto.subtle.decrypt({ name:'AES-GCM', iv }, key, ctWithTag);
+    const text = new TextDecoder().decode(plain);
+    document.getElementById('credLocked').style.display = 'none';
+    const out = document.getElementById('credUnlocked');
+    out.style.display = 'block';
+    out.textContent = text;
+  } catch(e) {
+    err.style.display = 'block';
+  }
+}
+document.getElementById('credPw').addEventListener('keydown', function(e){
+  if(e.key==='Enter') unlockCreds();
+});
+</script>
 
 </body>
 </html>
