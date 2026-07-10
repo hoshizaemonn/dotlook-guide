@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>.LOOK 運用マニュアル｜淺川様専用</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic", sans-serif;
+  color: #333;
+  background: #fafafa;
+  line-height: 1.7;
+  font-size: 16px;
+}
+.container { max-width: 900px; margin: 0 auto; padding: 20px; }
+
+/* 表紙 */
+.cover {
+  background: linear-gradient(135deg, #ff9a56 0%, #ff6b6b 100%);
+  color: #fff;
+  padding: 60px 30px;
+  text-align: center;
+  border-radius: 12px;
+  margin-bottom: 40px;
+  box-shadow: 0 8px 24px rgba(255, 107, 107, 0.2);
+}
+.cover h1 { font-size: 36px; margin-bottom: 12px; letter-spacing: 2px; }
+.cover .subtitle { font-size: 18px; opacity: 0.95; margin-bottom: 20px; }
+.cover .meta { font-size: 14px; opacity: 0.85; }
+
+/* 目次 */
+.toc {
+  background: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  margin-bottom: 40px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+.toc h2 { font-size: 20px; margin-bottom: 20px; color: #ff6b6b; border-left: 4px solid #ff6b6b; padding-left: 12px; }
+.toc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.toc-card {
+  background: #fff8f5;
+  border: 2px solid #ffe0d0;
+  padding: 24px 16px;
+  border-radius: 10px;
+  text-align: center;
+  text-decoration: none;
+  color: #333;
+  transition: all 0.2s;
+  display: block;
+}
+.toc-card:hover {
+  background: #ffe8db;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255,107,107,0.15);
+}
+.toc-card .icon { font-size: 48px; display: block; margin-bottom: 12px; }
+.toc-card .label { font-size: 16px; font-weight: bold; color: #ff6b6b; }
+.toc-card .num { font-size: 12px; color: #999; margin-top: 4px; }
+
+/* セクション */
+.section {
+  background: #fff;
+  padding: 40px 30px;
+  border-radius: 12px;
+  margin-bottom: 30px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+.section h2 {
+  font-size: 26px;
+  color: #ff6b6b;
+  margin-bottom: 24px;
+  padding-bottom: 12px;
+  border-bottom: 3px solid #ff6b6b;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.section h2 .icon { font-size: 36px; }
+.section h3 {
+  font-size: 18px;
+  margin: 24px 0 12px;
+  color: #ff6b6b;
+  border-left: 4px solid #ff9a56;
+  padding-left: 12px;
+}
+.section p { margin-bottom: 16px; }
+
+/* 動画セクション */
+.video-box {
+  background: #fff8f5;
+  border: 2px solid #ffe0d0;
+  padding: 20px;
+  border-radius: 10px;
+  margin: 20px 0;
+  text-align: center;
+}
+.video-box .video-icon { font-size: 40px; margin-bottom: 8px; }
+.video-box h4 { font-size: 18px; color: #ff6b6b; margin-bottom: 12px; }
+.video-btn {
+  display: inline-block;
+  background: #ff0000;
+  color: #fff;
+  text-decoration: none;
+  padding: 12px 24px;
+  border-radius: 6px;
+  font-weight: bold;
+  transition: background 0.2s;
+}
+.video-btn:hover { background: #cc0000; }
+
+/* URL カード */
+.url-card {
+  background: #f0f8ff;
+  border-left: 4px solid #4a90e2;
+  padding: 16px 20px;
+  border-radius: 6px;
+  margin: 12px 0;
+}
+.url-card .label { font-size: 12px; color: #666; margin-bottom: 4px; }
+.url-card .url {
+  font-family: monospace;
+  font-size: 14px;
+  color: #4a90e2;
+  word-break: break-all;
+}
+.url-card .login-note {
+  background: #fff4e6;
+  border: 1px dashed #ff9500;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 13px;
+  color: #ff6b00;
+  margin-top: 8px;
+}
+
+/* フロー図 */
+.flow {
+  display: flex;
+  gap: 8px;
+  align-items: stretch;
+  margin: 24px 0;
+  overflow-x: auto;
+  padding: 8px 0;
+}
+.flow-step {
+  flex: 1;
+  min-width: 100px;
+  background: linear-gradient(135deg, #fff8f5 0%, #ffe8db 100%);
+  border: 2px solid #ffb591;
+  padding: 16px 8px;
+  border-radius: 10px;
+  text-align: center;
+  position: relative;
+}
+.flow-step .num {
+  background: #ff6b6b;
+  color: #fff;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+.flow-step .icon { font-size: 28px; display: block; margin: 4px 0; }
+.flow-step .label { font-size: 13px; font-weight: bold; color: #444; }
+.flow-arrow {
+  display: flex;
+  align-items: center;
+  color: #ff9a56;
+  font-size: 24px;
+  flex-shrink: 0;
+}
+
+/* ポイントボックス */
+.point-box {
+  background: #fff4e6;
+  border-left: 4px solid #ff9500;
+  padding: 16px 20px;
+  border-radius: 6px;
+  margin: 16px 0;
+}
+.point-box .point-title {
+  font-weight: bold;
+  color: #ff6b00;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.point-box ul { padding-left: 20px; }
+.point-box li { margin-bottom: 4px; }
+
+/* URL 一覧テーブル */
+.url-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.url-table th, .url-table td {
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+  font-size: 14px;
+}
+.url-table th {
+  background: #ff6b6b;
+  color: #fff;
+  font-weight: bold;
+}
+.url-table tr:nth-child(even) { background: #fff8f5; }
+.url-table .url-cell {
+  font-family: monospace;
+  color: #4a90e2;
+  word-break: break-all;
+}
+.url-table .login-cell {
+  color: #ff6b00;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+/* 困った時 */
+.help-box {
+  background: linear-gradient(135deg, #fff8f5 0%, #ffe8db 100%);
+  padding: 30px;
+  border-radius: 12px;
+  border: 2px solid #ffb591;
+}
+.help-box h3 { border: none; padding: 0; margin-bottom: 16px; }
+.help-item {
+  background: #fff;
+  padding: 12px 16px;
+  border-radius: 6px;
+  margin: 8px 0;
+}
+
+/* ページ内リンク */
+.back-to-top {
+  text-align: center;
+  margin: 30px 0;
+}
+.back-to-top a {
+  color: #ff6b6b;
+  text-decoration: none;
+  font-size: 14px;
+  padding: 8px 16px;
+  border: 1px solid #ff6b6b;
+  border-radius: 20px;
+  display: inline-block;
+}
+.back-to-top a:hover { background: #ff6b6b; color: #fff; }
+
+/* フッター */
+footer {
+  text-align: center;
+  padding: 30px 20px;
+  color: #999;
+  font-size: 13px;
+  border-top: 1px solid #eee;
+  margin-top: 40px;
+}
+
+/* スマホ対応 */
+@media (max-width: 640px) {
+  .cover { padding: 40px 20px; }
+  .cover h1 { font-size: 26px; }
+  .toc-grid { grid-template-columns: 1fr; }
+  .section { padding: 24px 16px; }
+  .section h2 { font-size: 22px; }
+  .flow { flex-direction: column; }
+  .flow-arrow { transform: rotate(90deg); align-self: center; }
+  .url-table { font-size: 13px; }
+  .url-table th, .url-table td { padding: 8px 10px; }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- 表紙 -->
+  <div class="cover" id="top">
+    <h1>.LOOK 運用マニュアル</h1>
+    <div class="subtitle">淺川様専用ガイド</div>
+    <div class="meta">2026-07-10 版</div>
+  </div>
+
+  <!-- 目次（3つのやること） -->
+  <div class="toc">
+    <h2>📖 目次 － 淺川様がやること 3つ</h2>
+    <div class="toc-grid">
+      <a href="#section1" class="toc-card">
+        <span class="icon">📸</span>
+        <div class="label">買取事例を掲載</div>
+        <div class="num">セクション 1</div>
+      </a>
+      <a href="#section2" class="toc-card">
+        <span class="icon">🛍️</span>
+        <div class="label">商品を登録</div>
+        <div class="num">セクション 2</div>
+      </a>
+      <a href="#section3" class="toc-card">
+        <span class="icon">💳</span>
+        <div class="label">R18注文に対応</div>
+        <div class="num">セクション 3</div>
+      </a>
+    </div>
+  </div>
+
+  <!-- セクション1：買取事例 -->
+  <div class="section" id="section1">
+    <h2><span class="icon">📸</span>1. 買取事例の掲載</h2>
+
+    <p>お客様の買取事例を、写真と文章で掲載する方法です。</p>
+
+    <div class="video-box">
+      <div class="video-icon">🎥</div>
+      <h4>動画マニュアル</h4>
+      <p>下のボタンから動画で詳しい手順をご覧いただけます</p>
+      <a href="https://youtu.be/dppSxxiyFRY" target="_blank" class="video-btn">▶ 動画を見る</a>
+    </div>
+
+    <h3>📱 使う画面</h3>
+    <div class="url-card">
+      <div class="label">WordPress 管理画面</div>
+      <div class="url">https://dotlook.net/wp-admin/</div>
+      <div class="login-note">🔐 ログイン情報：別途お渡しする「ログイン情報」をご参照ください</div>
+    </div>
+
+    <h3>📋 作業の流れ</h3>
+    <div class="flow">
+      <div class="flow-step">
+        <div class="num">1</div>
+        <span class="icon">🔐</span>
+        <div class="label">ログイン</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">
+        <div class="num">2</div>
+        <span class="icon">✍️</span>
+        <div class="label">記事作成<br>（写真＋文章）</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">
+        <div class="num">3</div>
+        <span class="icon">📢</span>
+        <div class="label">公開</div>
+      </div>
+    </div>
+
+    <div class="point-box">
+      <div class="point-title">💡 ポイント</div>
+      <ul>
+        <li>写真は複数枚アップロード可能です</li>
+        <li>文章は買取時のエピソードなど自由に書けます</li>
+        <li>詳しい手順は動画をご確認ください</li>
+        <li>迷ったらもう一度動画をご覧ください</li>
+      </ul>
+    </div>
+
+    <div class="back-to-top"><a href="#top">↑ 目次に戻る</a></div>
+  </div>
+
+  <!-- セクション2：商品登録 -->
+  <div class="section" id="section2">
+    <h2><span class="icon">🛍️</span>2. カラーミーで商品を登録</h2>
+
+    <p>販売する商品をカラーミーショップに登録する方法です。</p>
+
+    <div class="video-box">
+      <div class="video-icon">🎥</div>
+      <h4>動画マニュアル</h4>
+      <p>下のボタンから動画で詳しい手順をご覧いただけます</p>
+      <a href="https://youtu.be/0LQgmK1PiYM" target="_blank" class="video-btn">▶ 動画を見る</a>
+    </div>
+
+    <h3>📱 使う画面</h3>
+    <div class="url-card">
+      <div class="label">カラーミーショップ 管理画面</div>
+      <div class="url">https://admin.shop-pro.jp/</div>
+      <div class="login-note">🔐 ログイン情報：別途お渡しする「ログイン情報」をご参照ください</div>
+    </div>
+
+    <h3>📋 作業の流れ</h3>
+    <div class="flow">
+      <div class="flow-step">
+        <div class="num">1</div>
+        <span class="icon">🔐</span>
+        <div class="label">ログイン</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">
+        <div class="num">2</div>
+        <span class="icon">➕</span>
+        <div class="label">商品追加<br>（写真・説明）</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">
+        <div class="num">3</div>
+        <span class="icon">💾</span>
+        <div class="label">保存</div>
+      </div>
+    </div>
+
+    <div class="point-box">
+      <div class="point-title">⚠️ カテゴリ選択が重要</div>
+      <ul>
+        <li><strong>R18商品</strong> → 必ず「R18カテゴリ」に登録</li>
+        <li><strong>通常商品</strong> → 必ず「通常カテゴリ」に登録</li>
+        <li>カテゴリを間違えると、決済方法（アダルト決済/通常決済）が正しく動きません</li>
+      </ul>
+    </div>
+
+    <div class="back-to-top"><a href="#top">↑ 目次に戻る</a></div>
+  </div>
+
+  <!-- セクション3：R18決済 -->
+  <div class="section" id="section3">
+    <h2><span class="icon">💳</span>3. R18注文への対応</h2>
+
+    <p>R18商品の注文が入った時の、決済URL発行の方法です。</p>
+
+    <div class="video-box">
+      <div class="video-icon">🎥</div>
+      <h4>動画マニュアル</h4>
+      <p>下のボタンから動画で詳しい手順をご覧いただけます</p>
+      <a href="https://youtu.be/5mH0KcLnF5c" target="_blank" class="video-btn">▶ 動画を見る</a>
+    </div>
+
+    <h3>📱 使う画面</h3>
+    <div class="url-card">
+      <div class="label">R18決済URL発行ツール（.LOOK専用）</div>
+      <div class="url">https://dotlook.net/r18-pay-tool/</div>
+      <div class="login-note">🔐 ログイン情報：別途お渡しする「ログイン情報」をご参照ください</div>
+    </div>
+
+    <h3>📋 作業の流れ（5ステップ）</h3>
+    <div class="flow">
+      <div class="flow-step">
+        <div class="num">1</div>
+        <span class="icon">📩</span>
+        <div class="label">注文通知<br>メール受信</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">
+        <div class="num">2</div>
+        <span class="icon">🔗</span>
+        <div class="label">ツールを<br>開く</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">
+        <div class="num">3</div>
+        <span class="icon">📝</span>
+        <div class="label">情報を<br>コピペ</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">
+        <div class="num">4</div>
+        <span class="icon">📤</span>
+        <div class="label">送信<br>ボタン</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">
+        <div class="num">5</div>
+        <span class="icon">✅</span>
+        <div class="label">入金<br>確認</div>
+      </div>
+    </div>
+
+    <div class="point-box">
+      <div class="point-title">💡 淺川様がやること</div>
+      <ul>
+        <li>ツールに <strong>受注ID・金額・お客様メール</strong> をコピペするだけ</li>
+        <li>送信ボタンを押すと <strong>お客様に決済URLメールが自動送信</strong>されます</li>
+        <li>1件あたりの所要時間：<strong>30秒〜1分</strong></li>
+        <li>送信完了後、淺川様にも控えメールが届きます</li>
+      </ul>
+    </div>
+
+    <div class="point-box" style="background:#e8f5e9;border-color:#4caf50;">
+      <div class="point-title" style="color:#2e7d32;">📘 詳しいマニュアル</div>
+      <p style="margin:0;">別途 <strong>「R18決済_手動送付マニュアル_淺川様用.html」</strong> に詳しい手順とFAQを記載しています。<br>そちらもあわせてご確認ください。</p>
+    </div>
+
+    <div class="back-to-top"><a href="#top">↑ 目次に戻る</a></div>
+  </div>
+
+  <!-- セクション4：URL一覧 -->
+  <div class="section" id="section4">
+    <h2><span class="icon">🌐</span>4. 管理画面 URL一覧</h2>
+
+    <p>普段使う管理画面のURLをまとめました。ブックマークをおすすめします。</p>
+
+    <table class="url-table">
+      <thead>
+        <tr>
+          <th>用途</th>
+          <th>URL</th>
+          <th>ログイン</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>📸 買取事例登録</td>
+          <td class="url-cell">https://dotlook.net/wp-admin/</td>
+          <td class="login-cell">別途</td>
+        </tr>
+        <tr>
+          <td>🛍️ 商品登録</td>
+          <td class="url-cell">https://admin.shop-pro.jp/</td>
+          <td class="login-cell">別途</td>
+        </tr>
+        <tr>
+          <td>💳 R18決済ツール</td>
+          <td class="url-cell">https://dotlook.net/r18-pay-tool/</td>
+          <td class="login-cell">別途</td>
+        </tr>
+        <tr>
+          <td>🔧 テレコム管理画面<br><small>（通常は使いません）</small></td>
+          <td class="url-cell">https://total.telecomcredit.co.jp/icredit/</td>
+          <td class="login-cell">別途</td>
+        </tr>
+        <tr>
+          <td>🔧 イプシロン管理画面<br><small>（通常は使いません）</small></td>
+          <td class="url-cell">https://secure.epsilon.jp/</td>
+          <td class="login-cell">別途</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="point-box">
+      <div class="point-title">🔐 ログイン情報について</div>
+      <p style="margin:0;">セキュリティ上、ログイン情報はこのマニュアルには記載していません。<br><strong>別途お渡しする「ログイン情報」ファイル</strong>をご参照ください。</p>
+    </div>
+
+    <div class="back-to-top"><a href="#top">↑ 目次に戻る</a></div>
+  </div>
+
+  <!-- セクション5：困った時 -->
+  <div class="section" id="section5">
+    <h2><span class="icon">🆘</span>5. 困った時は</h2>
+
+    <div class="help-box">
+      <h3>💬 お問い合わせ先</h3>
+
+      <div class="help-item">
+        <strong>🔧 技術的なトラブル</strong><br>
+        ランバード 星崎まで<br>
+        <small>（連絡先は別途お伝えしております）</small>
+      </div>
+
+      <div class="help-item">
+        <strong>📞 カラーミーサポート</strong><br>
+        0570-005-118（平日 10:00-18:00）
+      </div>
+
+      <div class="help-item">
+        <strong>📞 テレコムクレジット</strong><br>
+        契約書に記載のサポート窓口へ
+      </div>
+    </div>
+
+    <div class="point-box" style="margin-top:20px;">
+      <div class="point-title">💡 よくある質問</div>
+      <ul>
+        <li><strong>Q. ログインできない</strong> → ID/PWを再確認、または星崎まで</li>
+        <li><strong>Q. R18ツールでエラーが出る</strong> → 詳細マニュアルのFAQをご参照ください</li>
+        <li><strong>Q. 商品がサイトに表示されない</strong> → カテゴリ設定と「公開」ステータスをご確認ください</li>
+        <li><strong>Q. 何をすればいいか分からない</strong> → まず動画をご覧いただき、それでも不明な点はご連絡ください</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <footer>
+    <div>.LOOK 運用マニュアル｜2026-07-10 版</div>
+    <div style="margin-top:8px;">Powered by ランバード</div>
+  </footer>
+
+</div>
+
+</body>
+</html>
