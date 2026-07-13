@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>トップページ FV（スライダー）差し替えマニュアル｜.LOOK</title>
+<style>
+  :root{ --accent:#2b6cb0; --accent-d:#1c4e80; --line:#e3e3e3; --bg:#f7f9fb; --txt:#333; --muted:#777; --warn:#c05621; }
+  *{ box-sizing:border-box; }
+  body{ margin:0; background:var(--bg); color:var(--txt);
+        font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif; line-height:1.75; }
+  .page{ max-width:900px; margin:0 auto; padding:28px 22px 70px; }
+  header{ text-align:center; border-bottom:3px solid var(--accent); padding-bottom:16px; }
+  header h1{ font-size:22px; margin:0 0 4px; color:var(--accent-d); }
+  header .sub{ color:var(--muted); font-size:13px; }
+  h2{ font-size:18px; margin:30px 0 12px; padding:8px 12px; background:#e8f0fa; border-left:5px solid var(--accent); border-radius:4px; }
+  .lead{ background:#fff; border:1px solid var(--line); border-radius:10px; padding:16px 18px; margin-top:16px; }
+  .big-note{ background:#fff8ec; border:1px solid #f0d9b5; border-radius:10px; padding:14px 18px; margin-top:14px; color:#7a5b1e; }
+  ol.big{ counter-reset:st; list-style:none; padding-left:0; }
+  ol.big li{ position:relative; padding:12px 0 12px 46px; border-bottom:1px dashed #dfe6ee; }
+  ol.big li::before{ counter-increment:st; content:counter(st); position:absolute; left:0; top:11px;
+        width:30px; height:30px; background:var(--accent); color:#fff; border-radius:50%; text-align:center; line-height:30px; font-weight:bold; }
+  .path{ background:#eef4fb; border:1px solid #cfe0f2; border-radius:8px; padding:12px 14px; font-weight:bold; color:var(--accent-d); margin-top:10px; }
+  .fields{ background:#fff; border:1px solid var(--line); border-radius:10px; padding:6px 18px; margin-top:12px; }
+  .fields dt{ font-weight:bold; margin:14px 0 2px; color:var(--accent-d); }
+  .fields dd{ margin:0 0 8px; font-size:14px; }
+  .warn{ background:#fffaf0; border:1px solid #f0d9b5; border-radius:8px; padding:12px 14px; color:var(--warn); font-size:13.5px; margin-top:12px; }
+  strong.hl{ background:#fff3b0; padding:0 3px; border-radius:3px; }
+  code{ background:#eef1f4; border-radius:4px; padding:1px 6px; font-size:12.5px; }
+  footer{ text-align:center; color:var(--muted); font-size:12px; margin-top:36px; border-top:1px solid var(--line); padding-top:14px; }
+</style>
+</head>
+<body>
+<div class="page">
+  <header>
+    <h1>トップページ FV（メインスライダー）差し替えマニュアル</h1>
+    <div class="sub">.LOOK（どっとるっく）／ 淺川様専用 ｜ 作成：2026-07-10</div>
+  </header>
+
+  <div class="lead">
+    <p style="margin-top:0">トップページの一番上にある<strong>大きな写真（FV／スライダー）</strong>は、
+    現在<strong>6枚の写真が自動で切り替わるスライドショー</strong>になっています。</p>
+    <p style="margin-bottom:0"><strong class="hl">ここは「固定ページ」の編集画面では変えられません。</strong>
+    テーマ（Lightning）の<strong>「カスタマイズ」画面</strong>で変更します。だから編集画面を探しても見つからなかったんです。</p>
+  </div>
+
+  <h2>■ 変更する場所</h2>
+  <div class="path">外観 → カスタマイズ → 「Lightning トップページスライドショー」</div>
+  <p style="font-size:13.5px;color:#555">
+    （管理画面の上の黒帯にある<strong>「カスタマイズ」</strong>をクリック → 左メニューを下にスクロール →
+    <strong>「Lightning トップページスライドショー」</strong>をクリックして開きます）
+  </p>
+
+  <h2>■ FV画像を差し替える手順</h2>
+  <ol class="big">
+    <li>上の場所（Lightning トップページスライドショー）を開く。</li>
+    <li><strong>「[1] スライド画像」</strong>〜<strong>「[6] スライド画像」</strong>が並んでいます。変えたい番号の
+      <strong>「スライド画像」</strong>の<strong>「画像を変更」</strong>をクリック。</li>
+    <li>「ファイルをアップロード」から<strong>スマホ／PCの写真を選ぶ</strong>（またはメディアから選択）→「画像を選択」。</li>
+    <li>文字も変えるなら、同じ番号の<strong>「スライドタイトル」</strong>（大きい文字）と
+      <strong>「スライドテキスト」</strong>（小さい文字）を書き換える。</li>
+    <li>右上の青い<strong class="hl">「公開」</strong>ボタンを押す。これでトップの写真が新しくなります。</li>
+  </ol>
+
+  <h2>■ 各スライドで設定できる項目</h2>
+  <dl class="fields">
+    <dt>[n] スライド画像</dt><dd>FVの写真そのもの。<strong>ここを変えると見た目が変わります。</strong></dd>
+    <dt>[n] スライドタイトル</dt><dd>写真の上に出る<strong>大きい文字</strong>（例：「買取＆販売」）。空欄も可。</dd>
+    <dt>[n] スライドテキスト</dt><dd>その下の<strong>小さい説明文</strong>（例：「古本・骨董・成人向け商品まで…」）。</dd>
+    <dt>[n] モバイル用スライド画像（任意）</dt><dd>スマホ用に別の写真を出したいとき。無ければPC用が縮小表示されます。</dd>
+    <dt>[n] スライド画像リンク先 URL（任意）</dt><dd>写真をクリックしたときの飛び先。設定不要なら空欄でOK。</dd>
+  </dl>
+
+  <div class="big-note">
+    <strong>スライドの枚数を減らしたい／増やしたいとき：</strong>使わないスライドは「スライド画像」を空にすれば表示されなくなります。
+    切り替え速度は上部の<strong>「スライド静止時間」</strong>（現在5000ミリ秒＝5秒）で調整できます。
+  </div>
+
+  <div class="warn"><strong>写真のコツ：</strong>FVは横長の大きな写真が向いています（目安：<strong>横1900px前後</strong>）。
+  明るく、商品や店の雰囲気が伝わる写真がおすすめ。文字（タイトル）が写真に重なるので、
+  文字が乗る部分は<strong>ごちゃつかない写真</strong>だと読みやすくなります。</div>
+
+  <h2>■ 参考：ページの各部分をどこで直すか</h2>
+  <div class="fields">
+    <dt>トップの大きなスライダー（FV）</dt><dd>カスタマイズ → Lightning トップページスライドショー（このマニュアル）</dd>
+    <dt>買取事例の写真・文章・価格</dt><dd>「買取事例」→ 対象を編集（別マニュアル：買取事例_編集マニュアル）</dd>
+    <dt>トップの「買取カテゴリ」「買取の流れ」などの文章</dt><dd>「固定ページ」→「トップ」を編集（ブロックエディタ）</dd>
+  </div>
+
+  <footer>
+    .LOOK（どっとるっく）｜ トップFV（スライダー）差し替えマニュアル ｜ ご不明点は星崎まで ｜ 株式会社斗
+  </footer>
+</div>
+</body>
+</html>

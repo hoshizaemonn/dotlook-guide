@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>買取事例の編集・画像差し替えマニュアル｜.LOOK</title>
+<style>
+  :root{ --accent:#2b6cb0; --accent-d:#1c4e80; --line:#e3e3e3; --bg:#f7f9fb; --txt:#333; --muted:#777; --warn:#c05621; }
+  *{ box-sizing:border-box; }
+  body{ margin:0; background:var(--bg); color:var(--txt);
+        font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif; line-height:1.75; }
+  .page{ max-width:920px; margin:0 auto; padding:28px 22px 70px; }
+  header{ text-align:center; border-bottom:3px solid var(--accent); padding-bottom:16px; }
+  header h1{ font-size:23px; margin:0 0 4px; color:var(--accent-d); }
+  header .sub{ color:var(--muted); font-size:13px; }
+  h2{ font-size:18px; margin:32px 0 12px; padding:8px 12px; background:#e8f0fa; border-left:5px solid var(--accent); border-radius:4px; }
+  .lead{ background:#fff; border:1px solid var(--line); border-radius:10px; padding:16px 18px; margin-top:16px; }
+  .map{ display:flex; flex-wrap:wrap; gap:14px; margin-top:12px; }
+  .mcard{ flex:1 1 260px; background:#fff; border:1px solid var(--line); border-radius:10px; padding:14px 16px; box-shadow:0 1px 3px rgba(0,0,0,.04); }
+  .mcard .pub{ font-weight:bold; color:var(--accent-d); font-size:14px; }
+  .mcard .arrow{ color:var(--muted); font-size:12px; margin:4px 0; }
+  .mcard .edit{ font-size:13.5px; }
+  .mcard .tag{ display:inline-block; background:#eef4fb; color:var(--accent-d); border-radius:4px; padding:1px 8px; font-size:12px; margin-top:6px; }
+  ol.big{ counter-reset:st; list-style:none; padding-left:0; }
+  ol.big li{ position:relative; padding:12px 0 12px 46px; border-bottom:1px dashed #dfe6ee; }
+  ol.big li::before{ counter-increment:st; content:counter(st); position:absolute; left:0; top:11px;
+        width:30px; height:30px; background:var(--accent); color:#fff; border-radius:50%; text-align:center; line-height:30px; font-weight:bold; }
+  .box{ background:#fff; border:1px solid var(--line); border-radius:10px; padding:14px 18px; margin-top:12px; }
+  .warn{ background:#fffaf0; border:1px solid #f0d9b5; border-radius:8px; padding:12px 14px; color:var(--warn); font-size:13.5px; margin-top:12px; }
+  .ok{ background:#e8f6ec; border:1px solid #c3e6ce; border-radius:8px; padding:12px 14px; color:#256b3a; font-size:13.5px; margin-top:12px; }
+  code{ background:#eef1f4; border-radius:4px; padding:1px 6px; font-size:12.5px; }
+  .kbd{ display:inline-block; border:1px solid #bbb; border-bottom-width:2px; border-radius:5px; padding:1px 7px; font-size:12.5px; background:#fafafa; }
+  footer{ text-align:center; color:var(--muted); font-size:12px; margin-top:40px; border-top:1px solid var(--line); padding-top:14px; }
+  strong.hl{ background:#fff3b0; padding:0 3px; border-radius:3px; }
+</style>
+</head>
+<body>
+<div class="page">
+  <header>
+    <h1>買取事例の編集・画像差し替えマニュアル</h1>
+    <div class="sub">.LOOK（どっとるっく）／ 淺川様専用 ｜ WordPress管理画面 ｜ 作成：2026-07-10</div>
+  </header>
+
+  <div class="lead">
+    <p style="margin-top:0">買取事例ページの<strong>文章の書き換え</strong>と<strong>写真（FV画像）の差し替え</strong>は、
+    WordPress管理画面から <strong>Word感覚</strong>で行えます。専門知識は不要です。</p>
+    <p style="margin-bottom:0">入口：<code>https://dotlook.net/wp-admin/</code> → 左メニュー<strong>「買取事例」→「買取事例一覧」</strong>
+    → 直したい事例の<strong>「編集」</strong>をクリック。</p>
+  </div>
+
+  <h2>■ 公開ページのどこが、管理画面のどこで直せるか</h2>
+  <div class="map">
+    <div class="mcard">
+      <div class="pub">① 写真（FV画像／メインビジュアル）</div>
+      <div class="arrow">▼ 直す場所</div>
+      <div class="edit">編集画面の右側<strong>「アイキャッチ画像」</strong>ボックス。画像をクリック→「画像を削除」→「アイキャッチ画像を設定」で差し替え。</div>
+      <div class="tag">アイキャッチ画像 ＝ FV画像</div>
+    </div>
+    <div class="mcard">
+      <div class="pub">② 商品名（タイトル）</div>
+      <div class="arrow">▼ 直す場所</div>
+      <div class="edit">編集画面 上部の<strong>大きな入力欄</strong>（「風の谷のナウシカ 複製セル画集」の所）。</div>
+      <div class="tag">タイトル欄</div>
+    </div>
+    <div class="mcard">
+      <div class="pub">③ 買取価格（赤い ¥20,000）</div>
+      <div class="arrow">▼ 直す場所</div>
+      <div class="edit">下の方の<strong>「.look買取価格（数字のみ）」</strong>欄に数字だけ入力（例：<code>250000</code>）。カンマ・「円」は不要。</div>
+      <div class="tag">買取事例の情報 → look_price</div>
+    </div>
+    <div class="mcard">
+      <div class="pub">④ 本文（買取目安／商品基本情報／商品概要 など）</div>
+      <div class="arrow">▼ 直す場所</div>
+      <div class="edit">中央の<strong>ビジュアルエディタ</strong>（Wordのような画面）。文字を選んで打ち替え・箇条書き編集ができます。「ジャンル：」「年代・型番：」「付属品：」もここ。</div>
+      <div class="tag">本文エディタ（ビジュアル）</div>
+    </div>
+  </div>
+
+  <h2>■ 文章を書き換える手順</h2>
+  <ol class="big">
+    <li>「買取事例一覧」で対象の事例の<strong>「編集」</strong>を開く。</li>
+    <li>中央の<strong>ビジュアルエディタ</strong>で、直したい文章をクリックしてそのまま打ち替える（Word感覚）。
+      箇条書き（ジャンル・年代・付属品など）も、行末にカーソルを置いて <span class="kbd">Enter</span> で追加できます。</li>
+    <li>タイトル（商品名）や価格を変えるときは、②③の欄も直す。</li>
+    <li>右上の青い<strong class="hl">「更新」</strong>ボタンを押す。これで公開ページに反映されます。</li>
+  </ol>
+  <div class="ok"><strong>コツ：</strong>「■ 買取目安」「■ 商品基本情報」などの見出しは残したまま、中身の文だけ書き換えると体裁が崩れません。</div>
+
+  <h2>■ 写真（FV画像）を差し替える手順</h2>
+  <ol class="big">
+    <li>編集画面の<strong>右側</strong>にある<strong>「アイキャッチ画像」</strong>ボックスを見る（今の写真が小さく表示されています）。</li>
+    <li>今の画像を差し替えるなら、画像の下の<strong>「アイキャッチ画像を削除」</strong>→ 続けて<strong>「アイキャッチ画像を設定」</strong>をクリック。</li>
+    <li>「ファイルをアップロード」タブから<strong>スマホ／PCの写真を選ぶ</strong>（またはメディアライブラリから選択）。</li>
+    <li>右下の<strong>「アイキャッチ画像を設定」</strong>を押す。</li>
+    <li>最後に右上の<strong class="hl">「更新」</strong>を押す。これでトップの大きな写真（FV）が新しい画像に変わります。</li>
+  </ol>
+  <div class="warn"><strong>画像のコツ：</strong>できれば<strong>横長（目安：横1200px前後）</strong>の写真だと綺麗に表示されます。スマホ撮影の写真でもOK。容量が大きすぎる場合は自動で最適化されます。</div>
+
+  <h2>■ 新しい買取事例を追加するには</h2>
+  <div class="box">
+    左メニュー<strong>「買取事例」→「買取事例を追加」</strong>。編集画面 上部に出ている<strong>「投稿手順（3ステップ）」</strong>の通り、
+    ①商品名を入力 → ②右側でアイキャッチ画像（写真）を設定＋買取カテゴリを選ぶ → ③「.look買取価格」を数字で入れて<strong>「公開」</strong>。
+    <br>※<strong>iPhoneからも投稿・写真アップロードできます。</strong>
+  </div>
+
+  <h2>■ 補足（今回の不具合対応）</h2>
+  <div class="box">
+    以前ページ上部に出ていた英語のエラー文（<code>Warning: ... display_name ...</code>）は、
+    各買取事例の<strong>「作成者」情報が未設定（0）</strong>だったために表示されていたものです。
+    全14件の買取事例に作成者を設定し、<strong>エラー表示は解消済み</strong>です。
+    今後、淺川様が新規に追加する事例は作成者が自動で入るため、このエラーは出ません。
+  </div>
+
+  <footer>
+    .LOOK（どっとるっく）｜ 買取事例 編集マニュアル ｜ ご不明点は星崎まで ｜ 株式会社斗
+  </footer>
+</div>
+</body>
+</html>

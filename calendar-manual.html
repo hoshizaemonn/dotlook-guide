@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>営業日カレンダー（定休日・臨時休業）の使い方｜.LOOK</title>
+<style>
+  :root{ --accent:#2b8a5a; --accent-d:#1f6a44; --line:#e3e3e3; --bg:#f6faf7; --txt:#333; --muted:#777; --warn:#c05621; }
+  *{ box-sizing:border-box; }
+  body{ margin:0; background:var(--bg); color:var(--txt);
+        font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif; line-height:1.75; }
+  .page{ max-width:900px; margin:0 auto; padding:28px 22px 70px; }
+  header{ text-align:center; border-bottom:3px solid var(--accent); padding-bottom:16px; }
+  header h1{ font-size:21px; margin:0 0 4px; color:var(--accent-d); }
+  header .sub{ color:var(--muted); font-size:13px; }
+  h2{ font-size:18px; margin:30px 0 12px; padding:8px 12px; background:#e6f4ec; border-left:5px solid var(--accent); border-radius:4px; }
+  .path{ background:#e9f5ee; border:1px solid #cfe8db; border-radius:8px; padding:12px 14px; font-weight:bold; color:var(--accent-d); margin-top:10px; }
+  ol.big{ counter-reset:st; list-style:none; padding-left:0; }
+  ol.big li{ position:relative; padding:12px 0 12px 46px; border-bottom:1px dashed #dbe8e0; }
+  ol.big li::before{ counter-increment:st; content:counter(st); position:absolute; left:0; top:11px;
+        width:30px; height:30px; background:var(--accent); color:#fff; border-radius:50%; text-align:center; line-height:30px; font-weight:bold; }
+  .box{ background:#fff; border:1px solid var(--line); border-radius:10px; padding:14px 18px; margin-top:12px; }
+  .warn{ background:#fffaf0; border:1px solid #f0d9b5; border-radius:8px; padding:12px 14px; color:var(--warn); font-size:13.5px; margin-top:12px; }
+  .ok{ background:#e8f6ec; border:1px solid #c3e6ce; border-radius:8px; padding:12px 14px; color:#256b3a; font-size:13.5px; margin-top:12px; }
+  code{ background:#eef1f4; border-radius:4px; padding:1px 6px; font-size:12.5px; }
+  strong.hl{ background:#fff3b0; padding:0 3px; border-radius:3px; }
+  footer{ text-align:center; color:var(--muted); font-size:12px; margin-top:36px; border-top:1px solid var(--line); padding-top:14px; }
+</style>
+</head>
+<body>
+<div class="page">
+  <header>
+    <h1>営業日カレンダー（定休日・臨時休業）の使い方</h1>
+    <div class="sub">.LOOK（どっとるっく）／ 淺川様専用 ｜ カラーミー管理画面 ｜ 作成：2026-07-10</div>
+  </header>
+
+  <div class="ok" style="margin-top:16px"><strong>現在の設定：</strong>定休日＝<strong>日曜</strong>に設定済みです。発送時期の記載も「通常2〜3営業日以内（日曜・祝日・当店休業日を除く）」に更新済みです。</div>
+
+  <h2>■ どこで設定する？</h2>
+  <div class="path">カラーミー管理画面 → 左メニュー「ネットショップ」→「ショップ情報」→「営業日」</div>
+  <p style="font-size:13.5px;color:#555">（画面タイトルは「営業日 ＝ 営業日カレンダーの設定」です）</p>
+
+  <h2>■ ① 毎週の定休日を決める（曜日で指定）</h2>
+  <ol class="big">
+    <li>「営業日」画面の<strong>「定休日設定」</strong>を開く。</li>
+    <li><strong>定休日</strong>の欄で、休みにする曜日（日／月／火／水／木／金／土／祝日）に<strong>チェック</strong>を入れる。
+      <br>※現在は<strong class="hl">「日」</strong>にチェック済み（日曜定休）。</li>
+    <li>下の青い<strong class="hl">「設定」</strong>ボタンを押す。これで毎週その曜日が定休日になります。</li>
+  </ol>
+
+  <h2>■ ② 変則的な休み（臨時休業日）を登録する</h2>
+  <p>GW・お盆・年末年始・急なお休みなど、<strong>特定の日付だけ</strong>休む場合はこちら。</p>
+  <ol class="big">
+    <li>同じ「営業日」画面の<strong>「臨時休業日設定」</strong>を開く。</li>
+    <li>カレンダー（当月・翌月…）が出るので、<strong>休む日付のチェックボックスにチェック</strong>を入れる。</li>
+    <li>下の<strong class="hl">「設定」</strong>ボタンを押す。これでその日が臨時休業日になります。</li>
+  </ol>
+  <div class="ok"><strong>ポイント：</strong>臨時休業日は淺川様ご自身で、いつでも管理画面から追加・解除できます（チェックを外して「設定」で解除）。</div>
+
+  <h2>■ 発送との関係</h2>
+  <div class="box">
+    特商法の発送時期は<strong>「通常2〜3営業日以内（日曜・祝日・当店休業日を除く）」</strong>と記載しています。
+    定休日・臨時休業日はこの「営業日」の数え方の目安になります（日曜・登録した休業日はカウントしない、という運用）。
+  </div>
+
+  <h2>■ ショップに「休業日カレンダー」を表示したい場合</h2>
+  <div class="warn">
+    定休日・臨時休業日の<strong>登録</strong>は上記の管理画面だけで完了します。ただし、その<strong>カレンダーをショップページに“表示”</strong>するには、
+    テンプレートに専用ソースを設置する作業が別途必要です（「営業日」画面下部の「営業日カレンダーをショップページに表示」参照）。
+    表示もご希望の場合は<strong>星崎までご連絡ください</strong>（設置対応します）。
+  </div>
+
+  <footer>
+    .LOOK（どっとるっく）｜ 営業日カレンダーの使い方 ｜ ご不明点は星崎まで ｜ 株式会社斗
+  </footer>
+</div>
+</body>
+</html>
