@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>R18アダルト決済 手動送付マニュアル｜.LOOK</title>
+<style>
+  :root{ --accent:#c0392b; --accent-d:#961f13; --line:#e3e3e3; --bg:#faf7f6; --txt:#333; --muted:#777; }
+  *{ box-sizing:border-box; }
+  body{ margin:0; background:var(--bg); color:var(--txt);
+        font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif; line-height:1.75; }
+  .page{ max-width:900px; margin:0 auto; padding:28px 22px 70px; }
+  header{ text-align:center; border-bottom:3px solid var(--accent); padding-bottom:16px; }
+  header h1{ font-size:22px; margin:0 0 4px; color:var(--accent-d); }
+  header .sub{ color:var(--muted); font-size:13px; }
+  h2{ font-size:18px; margin:30px 0 12px; padding:8px 12px; background:#fdecea; border-left:5px solid var(--accent); border-radius:4px; }
+  .lead{ background:#fff; border:1px solid var(--line); border-radius:10px; padding:16px 18px; margin-top:16px; }
+  .flow{ display:flex; flex-wrap:wrap; gap:10px; margin-top:12px; align-items:stretch; }
+  .fstep{ flex:1 1 150px; background:#fff; border:1px solid var(--line); border-radius:10px; padding:12px; text-align:center; font-size:13px; box-shadow:0 1px 3px rgba(0,0,0,.04); }
+  .fstep .n{ display:inline-block; width:26px; height:26px; line-height:26px; border-radius:50%; background:var(--accent); color:#fff; font-weight:bold; margin-bottom:6px; }
+  ol.big{ counter-reset:st; list-style:none; padding-left:0; }
+  ol.big li{ position:relative; padding:12px 0 12px 46px; border-bottom:1px dashed #e7d9d6; }
+  ol.big li::before{ counter-increment:st; content:counter(st); position:absolute; left:0; top:11px;
+        width:30px; height:30px; background:var(--accent); color:#fff; border-radius:50%; text-align:center; line-height:30px; font-weight:bold; }
+  .tmpl{ background:#2b2b2b; color:#eee; border-radius:10px; padding:16px 18px; font-size:13px; line-height:1.7; white-space:pre-wrap; margin-top:10px; font-family:"Menlo","Consolas",monospace; }
+  .copybox{ background:#fff; border:1px dashed #bbb; border-radius:8px; padding:12px 14px; margin-top:8px; font-size:13px; }
+  .note{ background:#fff8ec; border:1px solid #ffe1b0; border-radius:8px; padding:12px 14px; font-size:13.5px; color:#7a5b1e; margin-top:12px; }
+  .warn{ background:#fdecea; border:1px solid #f5c6cb; border-radius:8px; padding:12px 14px; color:#7a1f1f; font-size:13.5px; margin-top:12px; }
+  code{ background:#eef1f4; border-radius:4px; padding:1px 6px; font-size:12.5px; }
+  strong.hl{ background:#fff3b0; padding:0 3px; border-radius:3px; }
+  footer{ text-align:center; color:var(--muted); font-size:12px; margin-top:36px; border-top:1px solid var(--line); padding-top:14px; }
+</style>
+</head>
+<body>
+<div class="page">
+  <header>
+    <h1>R18（アダルト）決済 手動送付マニュアル</h1>
+    <div class="sub">.LOOK（どっとるっく）／ 淺川様専用 ｜ 作成：2026-07-10</div>
+  </header>
+
+  <div class="lead">
+    <p style="margin-top:0">R18商品は、ご注文後に<strong>テレコムの決済URLを淺川様が発行し、お客様へメールで送る</strong>運用です。
+    お客様はそのURLからカード決済します。</p>
+  </div>
+
+  <div class="flow">
+    <div class="fstep"><span class="n">1</span><br>注文が入る<br>（メール受信）</div>
+    <div class="fstep"><span class="n">2</span><br>テレコムで<br>決済URLを発行</div>
+    <div class="fstep"><span class="n">3</span><br>定型文でお客様へ<br>URLを送る</div>
+    <div class="fstep"><span class="n">4</span><br>入金確認→<br>入金済みに更新</div>
+    <div class="fstep"><span class="n">5</span><br>発送</div>
+  </div>
+
+  <h2>■ STEP 1：注文情報を確認</h2>
+  <ol class="big">
+    <li>R18注文が入ると、<strong>カラーミーの注文通知メール</strong>が淺川様のメールに届きます。</li>
+    <li>その中の <strong>注文番号 ／ 合計金額（送料込）／ お客様メールアドレス</strong>（分かれば電話番号）を控えます。</li>
+  </ol>
+
+  <h2>■ STEP 2：テレコムで決済URLを発行（楽ちんメール払い）</h2>
+
+  <div class="warn" style="margin-top:0"><strong>【取扱注意】ログイン情報を含みます。この資料は社外・第三者に共有しないでください。</strong></div>
+  <div class="copybox">
+    <strong>テレコム ログイン情報（集計システム・URL発行 共通）</strong><br>
+    ・集計システム（入金確認）：<code>https://total.telecomcredit.co.jp/icredit/</code><br>
+    ・決済URL発行（楽ちんメール払い）：<code>https://secure.telecomcredit.co.jp/createurl/</code><br>
+    ・ID：<strong>tc2781</strong><br>
+    ・パスワード：<strong>DotLook2026!Px7</strong><br>
+    <span style="color:#7a1f1f;font-size:12px;">※ID・パスワードは両システム共通です。漏えい時は速やかにパスワード変更を。</span>
+  </div>
+
+  <ol class="big">
+    <li>テレコムの決済URL発行ページを開く：<code>https://secure.telecomcredit.co.jp/createurl/</code></li>
+    <li><strong>ID：tc2781</strong> とパスワードでログイン（集計システム total.telecomcredit.co.jp と同じID・パスワード）。</li>
+    <li>フォームに入力：
+      <br>・<strong>決済種別</strong>：都度決済
+      <br>・<strong>金額（必須）</strong>：注文の合計金額（送料込・数字のみ 例 5000）
+      <br>・<strong>メールアドレス</strong>：お客様のメール（任意だが入れておくと安心）
+      <br>・<strong>電話番号</strong>：分かれば入力（任意）
+      <br>・<strong>会員番号</strong>：<strong class="hl">カラーミーの注文番号</strong>を入れておくと、後で入金と注文を照合しやすいです（任意）
+    </li>
+    <li>発行ボタンを押すと <strong>決済URLが生成</strong>されます（例：<code>https://secure.telecomcredit.co.jp/inetcredit/secure/order.pl?clientip=50269&money=5000…</code>）。</li>
+    <li>ポップアップの<strong>コピーボタン</strong>でURLをコピーします。（LINE・メールで直接送るボタンもありますが、下記の定型文で送ると体裁がきれいです）</li>
+  </ol>
+  <div class="note">テレコムの画面にある「メール」ボタンから直接送ることもできます。定型文できれいに送りたい場合は、URLだけコピーして次のSTEP3へ。</div>
+
+  <h2>■ STEP 3：定型文にURLを貼ってお客様へ送信</h2>
+  <p>ご自身のメール（Gmail等）で、下記をコピーして貼り付け、<strong>○○の部分</strong>を埋めて送ります。</p>
+  <div class="tmpl">件名：【.LOOK】お支払いのご案内
+
+○○ 様
+
+この度は、.LOOK（どっとるっく）をご利用いただき誠にありがとうございます。
+ご注文いただいた商品のお支払いにつきまして、下記URLよりお手続きをお願いいたします。
+
+▼お支払いはこちら
+（ここにテレコムで発行した決済URLを貼り付け）
+
+■ご注文内容
+　注文番号：○○
+　お支払金額：○○円（送料込）
+
+※上記URLからクレジットカードでお支払いいただけます。
+※お支払い確認後、商品を発送いたします。
+※ご不明な点は、このメールにご返信ください。
+
+.LOOK（どっとるっく）</div>
+  <div class="note">埋める箇所は<strong>3つだけ</strong>：お客様のお名前／決済URL／注文番号・金額。宛先（To）はお客様のメールアドレスです。
+  <br>※カラーミー受注画面の「決済URL送信」機能を使うと、同じ文面（登録済み）で自動送信もできます。どちらでもOKです。</div>
+
+  <h2>■ STEP 4〜5：入金確認 → 発送</h2>
+  <ol class="big">
+    <li>お客様が決済すると、テレコムの管理画面（集計システム）で入金を確認できます。</li>
+    <li>入金を確認したら、<strong>カラーミー受注管理</strong>で該当注文を <strong class="hl">「入金済み」</strong> に更新（この1操作だけ手動）。</li>
+    <li>商品を発送し、<strong>「発送済み」</strong>に更新（お客様に発送メールが届きます）。</li>
+  </ol>
+
+  <div class="warn"><strong>ポイント：</strong>金額は必ず<strong>送料込みの合計</strong>で発行してください。会員番号にカラーミー注文番号を入れておくと、入金と注文の照合がラクになります。</div>
+
+  <footer>
+    .LOOK（どっとるっく）｜ R18アダルト決済 手動送付マニュアル ｜ ご不明点は星崎まで ｜ 株式会社斗
+  </footer>
+</div>
+</body>
+</html>

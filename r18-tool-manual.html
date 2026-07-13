@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>R18決済URL発行ツール 使い方マニュアル｜.LOOK</title>
+<style>
+  :root{ --accent:#ff9500; --accent-d:#e07f00; --line:#e3e3e3; --bg:#faf7f2; --txt:#333; --muted:#777; }
+  *{ box-sizing:border-box; }
+  body{ margin:0; background:var(--bg); color:var(--txt);
+        font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif; line-height:1.75; }
+  .page{ max-width:900px; margin:0 auto; padding:28px 22px 70px; }
+  header{ text-align:center; border-bottom:3px solid var(--accent); padding-bottom:16px; margin-bottom:6px; }
+  header h1{ font-size:23px; margin:0 0 4px; color:var(--accent-d); }
+  header .sub{ color:var(--muted); font-size:13px; }
+  h2{ font-size:18px; margin:34px 0 12px; padding:8px 12px; background:#fff3e0; border-left:5px solid var(--accent); border-radius:4px; }
+  h3{ font-size:15px; margin:20px 0 6px; }
+  p{ margin:8px 0; }
+  .lead{ background:#fff; border:1px solid var(--line); border-radius:10px; padding:16px 18px; margin-top:16px; }
+  .steps{ display:flex; flex-wrap:wrap; gap:16px; margin-top:10px; }
+  .stepcard{ flex:1 1 250px; background:#fff; border:1px solid var(--line); border-radius:12px; padding:0 0 14px; overflow:hidden; box-shadow:0 1px 4px rgba(0,0,0,.05); }
+  .stepcard .cap{ background:var(--accent); color:#fff; font-weight:bold; font-size:14px; padding:8px 12px; }
+  .stepcard .body{ padding:12px 14px; font-size:13.5px; }
+  .mock{ border:1px solid #ddd; border-radius:10px; margin:12px; background:#f5f5f7; padding:12px 10px; }
+  .mock .mhead{ text-align:center; color:var(--accent-d); font-weight:bold; font-size:12px; margin-bottom:8px; }
+  .mock .mcard{ background:#fff; border:1px solid #e3e3e3; border-radius:8px; padding:12px; }
+  .mock h4{ font-size:13px; margin:0 0 10px; padding-bottom:6px; border-bottom:2px solid var(--accent); }
+  .mock label{ display:block; font-size:11.5px; font-weight:bold; margin:8px 0 3px; }
+  .mock .req{ background:var(--accent); color:#fff; font-size:9px; border-radius:3px; padding:0 5px; margin-left:4px; }
+  .mock .opt{ background:#bbb; color:#fff; font-size:9px; border-radius:3px; padding:0 5px; margin-left:4px; }
+  .mock .inp{ border:1px solid #ccc; border-radius:6px; padding:7px 8px; font-size:12px; color:#333; background:#fff; }
+  .mock .inp.ph{ color:#aaa; }
+  .mock .btn{ text-align:center; border-radius:7px; padding:9px; font-weight:bold; font-size:12.5px; margin-top:12px; }
+  .mock .btn.p{ background:var(--accent); color:#fff; }
+  .mock .btn.s{ background:#fff; color:#333; border:1px solid #bbb; margin-top:8px; }
+  .mock .row{ display:flex; justify-content:space-between; font-size:12px; padding:6px 0; border-bottom:1px solid #eee; }
+  .mock .row .k{ color:#888; }
+  .mock .row .v{ font-weight:bold; }
+  .mock .note{ background:#fff8ec; border:1px solid #ffe1b0; border-radius:6px; padding:8px; font-size:10.5px; color:#7a5b1e; margin-top:10px; }
+  .mock .done{ color:#1b7f2e; }
+  ol.big{ counter-reset:st; list-style:none; padding-left:0; }
+  ol.big li{ position:relative; padding:10px 0 10px 44px; border-bottom:1px dashed #e3ddd2; }
+  ol.big li::before{ counter-increment:st; content:counter(st); position:absolute; left:0; top:9px;
+        width:30px; height:30px; background:var(--accent); color:#fff; border-radius:50%; text-align:center; line-height:30px; font-weight:bold; }
+  .faq{ background:#fff; border:1px solid var(--line); border-radius:10px; padding:6px 18px; margin-top:12px; }
+  .faq dt{ font-weight:bold; margin:16px 0 4px; color:var(--accent-d); }
+  .faq dt::before{ content:"Q. "; }
+  .faq dd{ margin:0 0 8px; padding-left:1.4em; }
+  .faq dd::before{ content:"A. "; font-weight:bold; color:#555; margin-left:-1.4em; }
+  .warn{ background:#fdecea; border:1px solid #f5c6cb; border-radius:8px; padding:12px 14px; color:#7a1f1f; font-size:13.5px; margin-top:12px; }
+  .ok{ background:#e8f5e9; border:1px solid #c8e6c9; border-radius:8px; padding:12px 14px; color:#1b5e20; font-size:13.5px; margin-top:12px; }
+  footer{ text-align:center; color:var(--muted); font-size:12px; margin-top:40px; border-top:1px solid var(--line); padding-top:14px; }
+  code{ background:#f0f0f3; border-radius:4px; padding:1px 5px; font-size:12.5px; }
+</style>
+</head>
+<body>
+<div class="page">
+  <header>
+    <h1>R18決済URL発行ツール 使い方マニュアル</h1>
+    <div class="sub">.LOOK（どっとるっく）／ 淺川様専用ツール ｜ 作成：2026-07-09</div>
+  </header>
+
+  <div class="lead">
+    <p style="margin-top:0"><strong>このツールでできること：</strong>成人向け（R18）商品の注文が入ったとき、
+    <strong>フォームに3項目を入れて「送信」を押すだけ</strong>で、お客様に決済案内メールが自動で届きます。
+    URLを手で組み立てたり、メール文面を毎回書いたりする必要がなくなります。</p>
+    <p style="margin-bottom:0">アクセスは <code>https://dotlook.net/r18-pay-tool/</code>（要ID・パスワード）。
+    スマホからでも使えます。</p>
+  </div>
+
+  <h2>■ 全体の流れ（3ステップ）</h2>
+  <div class="steps">
+
+    <div class="stepcard">
+      <div class="cap">STEP 1　入力</div>
+      <div class="mock">
+        <div class="mhead">.LOOK ｜ R18決済URL発行ツール</div>
+        <div class="mcard">
+          <h4>お客様情報を入力</h4>
+          <label>受注ID <span class="req">必須</span></label>
+          <div class="inp">218617893</div>
+          <label>金額（円）<span class="req">必須</span></label>
+          <div class="inp">1000</div>
+          <label>お客様メール <span class="req">必須</span></label>
+          <div class="inp">customer@example.com</div>
+          <label>お客様電話 <span class="opt">任意</span></label>
+          <div class="inp ph">例：09012345678</div>
+          <label>お名前 <span class="opt">任意</span></label>
+          <div class="inp ph">例：山田 太郎</div>
+          <div class="btn p">確認画面へ →</div>
+        </div>
+      </div>
+      <div class="body">カラーミー受注画面を見ながら、<strong>受注ID・金額・お客様メール</strong>を入力。電話とお名前は分かれば入れる程度でOK。</div>
+    </div>
+
+    <div class="stepcard">
+      <div class="cap">STEP 2　確認</div>
+      <div class="mock">
+        <div class="mhead">.LOOK ｜ R18決済URL発行ツール</div>
+        <div class="mcard">
+          <h4>この内容で送信します</h4>
+          <div class="row"><span class="k">受注ID</span><span class="v">218617893</span></div>
+          <div class="row"><span class="k">金額</span><span class="v">1,000 円</span></div>
+          <div class="row"><span class="k">お客様メール</span><span class="v">customer@…</span></div>
+          <div class="row"><span class="k">電話</span><span class="v">（未入力）</span></div>
+          <div class="note">「送信する」を押すと、お客様に決済案内メールが送られます。淺川様にも控えが届きます。</div>
+          <div class="btn p">この内容で送信する</div>
+          <div class="btn s">← 入力に戻して修正する</div>
+        </div>
+      </div>
+      <div class="body">内容を確認。間違いがあれば<strong>「入力に戻して修正」</strong>、良ければ<strong>「送信する」</strong>。</div>
+    </div>
+
+    <div class="stepcard">
+      <div class="cap">STEP 3　完了</div>
+      <div class="mock">
+        <div class="mhead">.LOOK ｜ R18決済URL発行ツール</div>
+        <div class="mcard">
+          <h4 class="done">送信が完了しました ✓</h4>
+          <div class="row"><span class="k">受注ID</span><span class="v">218617893</span></div>
+          <div class="row"><span class="k">金額</span><span class="v">1,000 円</span></div>
+          <div class="row"><span class="k">送信先</span><span class="v">customer@…</span></div>
+          <div class="note">お客様の入金が確認できたら、カラーミー受注画面で<strong>「入金済み」</strong>に更新してください。</div>
+          <div class="btn p">続けて別の注文を送信する</div>
+        </div>
+      </div>
+      <div class="body">これで完了。お客様はメール内のリンクからカードでお支払いできます。</div>
+    </div>
+
+  </div>
+
+  <h2>■ 具体的な手順</h2>
+  <ol class="big">
+    <li><strong>R18商品の注文が入る</strong>（カラーミーから受注通知メールが届きます）。</li>
+    <li>ツールを開く：<code>https://dotlook.net/r18-pay-tool/</code>（ID・パスワードを入力）。</li>
+    <li>カラーミー受注画面で <strong>注文番号（受注ID）</strong> と <strong>合計金額（送料込）</strong> と <strong>お客様のメールアドレス</strong> を確認。</li>
+    <li>ツールのフォームに、その3つを入力（電話・お名前は任意）。</li>
+    <li><strong>「確認画面へ」→ 内容確認 →「この内容で送信する」</strong>。</li>
+    <li>お客様に決済案内メール（件名：<strong>【.LOOK】お支払いのご案内</strong>）が届きます。淺川様にも控えメールが届きます。</li>
+    <li>お客様がお支払い→入金が確認できたら、<strong>カラーミー受注画面で「入金済み」に更新</strong>（この操作だけ手動です）。</li>
+  </ol>
+
+  <div class="ok"><strong>ポイント：</strong>入力するのは基本 <strong>3項目だけ</strong>。金額は「送料込みの合計」を数字で（カンマ・円マークは不要、自動で処理されます）。</div>
+
+  <h2>■ よくある質問（FAQ）・困ったとき</h2>
+  <dl class="faq">
+    <dt>お客様にメールが届かない／迷惑メールに入る</dt>
+    <dd>まずお客様に迷惑メールフォルダの確認をお願いしてください。繰り返し届かない場合は、メールアドレスの打ち間違い（全角・スペース混入）がないか確認を。改善しなければ星崎までご連絡ください（SMTP送信への切替で到達率を上げられます）。</dd>
+
+    <dt>「セッションの有効期限が切れました」と出た</dt>
+    <dd>入力画面を長く開いたままだと出ることがあります。お手数ですが最初から入力し直してください（安全のための仕組みです）。</dd>
+
+    <dt>金額を間違えて送ってしまった</dt>
+    <dd>お客様にはまだ「案内メール」が届いた段階で、決済はこれからです。正しい金額でもう一度送信し、お客様に「先ほどのメールは破棄し、新しいメールからお願いします」とご連絡ください。</dd>
+
+    <dt>受注IDって何を入れるの？</dt>
+    <dd>カラーミー受注画面の<strong>注文番号</strong>です（例：218617893）。半角の英数字。これがお客様のお支払いと注文を結びつける番号になります。</dd>
+
+    <dt>電話番号・お名前は必須？</dt>
+    <dd>いいえ、任意です。分からなければ空欄でOK。空欄でも決済URLは正しく発行されます。</dd>
+
+    <dt>送信したかどうか後から確認したい</dt>
+    <dd>送信するたびに淺川様宛に控えメールが届きます。加えて、サーバー内 <code>logs/history_年月.csv</code> に履歴が残ります（Excelで開けます）。</dd>
+
+    <dt>ツールのURLを開くとID・パスワードを聞かれる</dt>
+    <dd>淺川様だけが使えるようにBASIC認証をかけています。設定したID・パスワードを入力してください（忘れた場合は星崎で再設定します）。</dd>
+
+    <dt>「エラーが発生しました」と赤く出た</dt>
+    <dd>入力欄の下に赤字で理由が出ます（例：金額は数値で、メール形式が不正、など）。表示に従って直してください。原因不明のエラーが続く場合は、その画面を撮って星崎までお送りください。</dd>
+  </dl>
+
+  <div class="warn"><strong>注意：</strong>「送信」＝決済案内メールがお客様へ実際に送られます。テストで動きを試すときは、
+  <strong>お客様メール欄にご自身のメールアドレス</strong>を入れて送信し、届いたメールを確認してください。</div>
+
+  <div class="warn" style="margin-top:10px"><strong>入金後の1操作だけ手動です：</strong>お客様のお支払いが済んだら、
+  カラーミー受注画面で該当注文を<strong>「入金済み」</strong>に更新してください（このツールは案内メール送信までを担当します）。</div>
+
+  <footer>
+    .LOOK（どっとるっく）｜ R18決済URL発行ツール（方法2）使い方マニュアル<br>
+    ご不明点は星崎まで ｜ 株式会社斗
+  </footer>
+</div>
+</body>
+</html>
